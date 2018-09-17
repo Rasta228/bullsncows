@@ -3,15 +3,17 @@
 void game()
 {
 	srand(time(NULL));
-	int number, bulls, cows;
+	int number;
+	int bulls = 0;
+	int cows = 0;
 	int i = 0;
-	int *arr = (int*)malloc(ARR_SIZE * sizeof(int));
-	int *secarr = (int*)malloc(ARR_SIZE * sizeof(int));
+	int *arr = (int*)malloc(ARR_SIZE * sizeof(int)); // дин мас первого игр 
+	int *secarr = (int*)malloc(ARR_SIZE * sizeof(int)); // вводимые 2 игрока 
 	s:
 	printf("Enter a number with 4 non-repeating digits\n");
 	scanf("%d", &number);
 	arr = numberBreaking(number);
-	if(!isNonRepeating(arr) || number < 1000 || number > 9999)
+	if(!isNonRepeating(arr) || number < 1000 || number > 9999) //проверка опервого игрока
 	{
 		printf("You must enter a number with 4 non-repeating digits!\n");
 		goto s;
@@ -25,7 +27,7 @@ void game()
 		printf("Enter a number with 4 non-repeating digits\n");
 		scanf("%d", &number);
 		secarr = numberBreaking(number);
-		if(!isNonRepeating(secarr) || number < 1000 || number > 9999)
+		if(!isNonRepeating(secarr) || number < 1000 || number > 9999) // проверка 
 		{
 			printf("You must enter a number with 4 non-repeating digits!\n");
 			goto z;
@@ -33,7 +35,7 @@ void game()
 		bulls = howManyBulls(arr, secarr);
 		cows = howManyCows(arr, secarr);
 		printf("%d bull(s) and %d cow(s)\n", bulls, cows);
-		i++;
+		i++; // кол ходов 
 	}
 	printf("Congratulations! You win in %d moves\n", i);
 }

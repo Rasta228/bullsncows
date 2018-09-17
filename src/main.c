@@ -5,7 +5,7 @@ int main()
 	int choose;
 	s:
 	system("clear");
-	printf("\tThe \"100 matches\" game\n");
+	printf("\tThe \"bulls and cows\" game\n");
 	printf("1. The game\n");
 	printf("2. Rules\n");
 	printf("3. Quit\n");
