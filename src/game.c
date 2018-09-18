@@ -3,17 +3,29 @@
 void game()
 {
 	srand(time(NULL));
-	int number;
-	int bulls = 0;
-	int cows = 0;
+	int number, bulls, cows;
+    int n;
 	int i = 0;
-	int *arr = (int*)malloc(ARR_SIZE * sizeof(int)); // дин мас первого игр 
-	int *secarr = (int*)malloc(ARR_SIZE * sizeof(int)); // вводимые 2 игрока 
+	int *arr = (int*)malloc(ARR_SIZE * sizeof(int));
+	int *secarr = (int*)malloc(ARR_SIZE * sizeof(int));
 	s:
 	printf("Enter a number with 4 non-repeating digits\n");
-	scanf("%d", &number);
+    do {
+        n = scanf("%d", &number);
+        while (getchar() != '\n');
+        if (n == 1)
+        {
+            arr = numberBreaking(number);
+	        if(!isNonRepeating(arr) || number < 1000 || number > 9999)
+	        {
+		        printf("You must enter a number with 4 non-repeating digits!\n");
+		        goto s;
+	        }
+        }
+        else printf("%s", "Don't enter letters!!\n"); }
+    while (n != 1);
 	arr = numberBreaking(number);
-	if(!isNonRepeating(arr) || number < 1000 || number > 9999) //проверка опервого игрока
+	if(!isNonRepeating(arr) || number < 1000 || number > 9999)
 	{
 		printf("You must enter a number with 4 non-repeating digits!\n");
 		goto s;
@@ -25,17 +37,24 @@ void game()
 		cows = 0;
 		z:
 		printf("Enter a number with 4 non-repeating digits\n");
-		scanf("%d", &number);
-		secarr = numberBreaking(number);
-		if(!isNonRepeating(secarr) || number < 1000 || number > 9999) // проверка 
-		{
-			printf("You must enter a number with 4 non-repeating digits!\n");
-			goto z;
-		}
+		do {
+        n = scanf("%d", &number);
+        while (getchar() != '\n');
+        if (n == 1)
+        {
+            secarr = numberBreaking(number);
+	        if(!isNonRepeating(arr) || number < 1000 || number > 9999)
+	        {
+		        printf("You must enter a number with 4 non-repeating digits!\n");
+		        goto z;
+	        }
+        }
+        else printf("%s", "Don't enter letters!!\n"); }
+        while (n != 1);
 		bulls = howManyBulls(arr, secarr);
 		cows = howManyCows(arr, secarr);
 		printf("%d bull(s) and %d cow(s)\n", bulls, cows);
-		i++; // кол ходов 
+		i++;
 	}
 	printf("Congratulations! You win in %d moves\n", i);
 }
